@@ -18,8 +18,8 @@ public class Bar {
         Random random = new Random();
         this.value = value;
         this.height = (int)Math.ceil(((double)value/(double) height) * 2000);
-        this.width = ((int)Math.ceil(((double)width/(double) size) * 0.75));
-        this.startingPoint = this.width * index + (4 * index + 5);
+        this.width = ((int)Math.ceil(((double)width/(double) size) * 0.93));
+        this.startingPoint = this.width * index + (3 * index + 4);
         this.stratingOfString = this.startingPoint + (int)(Math.floor(this.width * 0.25));
         this.heightOfString = this.height+20;
         int rr = random.nextInt(255);
@@ -28,11 +28,25 @@ public class Bar {
         int r = Math.min(100 + rr, 220);
         int g = Math.min(100 + br, 220);
         int b = Math.min(100 + gr, 220);
-        myColor = new Color(r, g, b);
+        this.myColor = new Color(r, g, b);
+        this.tempColor = this.myColor;
+    }
+
+    public void swap(Bar b) {
+        int value = this.value;
+        int height = this.height;
+        int heightOfString = this.heightOfString;
+
+        this.value = b.value;
+        this.height = b.height;
+        this.heightOfString = b.heightOfString;
+
+        b.value = value;
+        b.height = height;
+        b.heightOfString = heightOfString;
     }
 
     public void select() {
-        this.tempColor = this.myColor;
         this.myColor = new Color(0, 255, 0);
     }
 

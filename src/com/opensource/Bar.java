@@ -11,15 +11,35 @@ public class Bar {
     public int startingPoint;
     public int stratingOfString;
     public int heightOfString;
-    public int size;
     public Color tempColor;
+
+    public Bar(Bar bar) {
+        this.value = bar.value;
+        this.height = bar.height;
+        this.width = bar.width;
+        this.startingPoint = bar.startingPoint;
+        this.stratingOfString = bar.stratingOfString;
+        this.heightOfString = bar.heightOfString;
+        this.myColor = bar.myColor;
+        this.tempColor = bar.tempColor;
+    }
 
     public Bar(int value, int height, int width, int index, int size) {
         Random random = new Random();
         this.value = value;
         this.height = (int)Math.ceil(((double)value/(double) height) * 2000);
         this.width = ((int)Math.ceil(((double)width/(double) size) * 0.93));
-        this.startingPoint = this.width * index + (3 * index + 4);
+        if(size < 13) {
+            this.startingPoint = this.width * index + (3 * index + 4);
+        } else if (size <= 23) {
+            this.startingPoint = this.width * index + (index + 3);
+        } else if(size <= 33) {
+            this.startingPoint = this.width * index + (index + 2);
+        } else if(size < 40) {
+            this.startingPoint = this.width * index + (index + 1);
+        } else {
+            this.startingPoint = (this.width * index) + (index == 0 ? 2: 0) ;
+        }
         this.stratingOfString = this.startingPoint + (int)(Math.floor(this.width * 0.25));
         this.heightOfString = this.height+20;
         int rr = random.nextInt(255);
@@ -47,8 +67,10 @@ public class Bar {
     }
 
     public void select() {
-        this.myColor = new Color(0, 255, 0);
+        this.myColor = Color.GREEN;
     }
+
+    public void halfSelect() { this.myColor = Color.ORANGE; }
 
     public void unselect() {
         this.myColor = this.tempColor;
